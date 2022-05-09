@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.hana.service">
+
+<insert id="signup">
+	insert into signup values(#{param1},#{param2},#{param3},#{param4})
+</insert>
+
+<select id="login" resultType="com.ezen.hana.signupdto">
+		SELECT id, pw 
+		  FROM signup
+		 WHERE id = #{param1}
+		   AND pw = #{param2}   
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

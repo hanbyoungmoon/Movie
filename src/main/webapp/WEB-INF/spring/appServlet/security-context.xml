@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+xmlns:beans="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/security 
+http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+ 
+ <http auto-config='true'> 
+ <!--  스프링 시큐리티가 기본 로그인페이지를 제공해준다. 
+ 나중에 나오겠지만 로그인 페이지를 개발자 입맛에 맞게 커스텀 할 수 있다.-->
+ <intercept-url pattern="/**" access="ROLE_ADMIN" /> 
+  <!-- “/**” 는 모든 디렉토리와 파일을 가르킨다. 
+  즉, ROLE_ADMIN만 모든 디렉토리와 파일에 접근할 수 있는 권한을 가진다 의미. -->
+ </http> 
+ 
+ <authentication-manager> 
+ <!--유저들의 권한을 설정한다. 
+ <user>태그의 authorities 옵션은 해당 유저의 권한을 뜻한다. 
+ admin 유저는 ROLE_USER와 ROLE_ADMIN 권한을 갖고 있으며,
+  guest와 guest2는 ROLE_USER 권한만 가지고 있음을 뜻한다.
+권한을 설정할 땐 기본적으로 "ROLE_” 를 접두어로 붙여 사용한다. 
+만약 다른 네임 규칙을 정하고 싶다면 <authentication-provider> 
+태그 내에 role-prefix 옵션을 통해 변경할 수 있다.  -->
+ <authentication-provider> 
+ <user-service> 
+ <user name="admin" password="1234" authorities="ROLE_USER, ROLE_ADMIN" /> 
+ <user name="guest" password="1234" authorities="ROLE_USER" /> 
+ <user name="guest2" password="a1234" authorities="ROLE_USER" /> 
+ </user-service> 
+ </authentication-provider>
+  </authentication-manager>
+   </beans:beans>
